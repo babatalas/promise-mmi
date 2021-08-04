@@ -1,3 +1,6 @@
 [submodule "promise-api"]
 	path = promise-api
 	url = https://github.com/babatalas/promise-api
+[submodule "promise-client"]
+	path = promise-client
+	url = https://github.com/babatalas/promise-client
