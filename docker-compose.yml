@@ -1,0 +1,28 @@
+version: "3.7"
+services:
+  postgres:
+    image: postgres:13.3-alpine3.14
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: devpass
+      POSTGRES_DB: promise-mmi
+  promise-api:
+    image: babatalas/promise-api-test:0.0.1
+    container_name: promise-api-prod-test
+    depends_on:
+      - postgres
+    environment:
+      WAIT_HOSTS: postgres:5432
+    ports:
+      - 8081:8081
+  promise-client:
+    image: babatalas/promise-client-test:0.0.1
+    container_name: promise-client-prod-test
+    depends_on:
+      - promise-api
+    environment:
+      WAIT_HOSTS: promise-api:8081
+    ports:
+      - 8080:80
